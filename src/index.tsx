@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { QueryClient, QueryClientProvider } from 'react-query'
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
@@ -7,13 +8,19 @@ import { Global } from '@emotion/react'
 import globalStyles from './styles/globalStyles'
 import { AlertProvider } from '@contexts/AlertContext'
 
+const client = new QueryClient({
+  defaultOptions: {},
+})
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <Global styles={globalStyles} />
-    <AlertProvider>
-      <App />
-    </AlertProvider>
+    <QueryClientProvider client={client}>
+      <AlertProvider>
+        <App />
+      </AlertProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
 )
 
