@@ -4,6 +4,7 @@ import { getCards } from '@remote/card'
 import { useNavigate } from 'react-router-dom'
 import ListRow from '@common/ListRow'
 import Badge from '../common/Badge'
+import { css } from '@emotion/react'
 
 const CardList = () => {
   const {
@@ -67,7 +68,7 @@ const CardList = () => {
 
   return (
     <div>
-      <ul>
+      <ul css={cardStyles}>
         {cards.map((card, index) => {
           return (
             <ListRow
@@ -88,5 +89,9 @@ const CardList = () => {
     </div>
   )
 }
+
+const cardStyles = css`
+  cursor: pointer;
+`
 
 export default CardList
