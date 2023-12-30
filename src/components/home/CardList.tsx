@@ -1,8 +1,9 @@
+import { useCallback, useEffect, useRef } from 'react'
 import { useInfiniteQuery } from 'react-query'
 import { getCards } from '@remote/card'
+import { useNavigate } from 'react-router-dom'
 import ListRow from '@common/ListRow'
-import Button from '../common/Button'
-import { useCallback, useEffect, useRef } from 'react'
+import Badge from '../common/Badge'
 
 const CardList = () => {
   const {
@@ -22,6 +23,8 @@ const CardList = () => {
       refetchOnWindowFocus: false,
     },
   )
+
+  const navigate = useNavigate()
 
   const loader = useRef(null)
 
@@ -64,7 +67,6 @@ const CardList = () => {
 
   return (
     <div>
-      <Button onClick={() => fetchNextPage()}>더보기</Button>
       <ul>
         {cards.map((card, index) => {
           return (
@@ -73,8 +75,11 @@ const CardList = () => {
               contents={
                 <ListRow.Texts title={`${index + 1}위`} subTitle={card.name} />
               }
-              right={card.payback !== null ? <div>{card.payback}</div> : null}
+              right={card.payback ? <Badge label={card.payback} /> : null}
               arrow
+              onClick={() => {
+                navigate(`/card/${card.id}`)
+              }}
             />
           )
         })}
