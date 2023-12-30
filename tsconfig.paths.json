@@ -6,7 +6,11 @@
       "@components/*": ["src/components/*"],
       "@styles/*": ["src/styles/*"],
       "@common/*": ["src/components/common/*"],
-      "@contexts/*": ["src/contexts/*"]
+      "@contexts/*": ["src/contexts/*"],
+      "@types/*": ["src/types/*"],
+      "@pages/*": ["src/pages/*"],
+      "@remote/*": ["src/remote/*"],
+      "@constants/*": ["src/constants/index"]
     }
   }
 }
