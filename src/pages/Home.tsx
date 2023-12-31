@@ -5,7 +5,10 @@ import Top from '@common/Top'
 const HomePage = () => {
   return (
     <div>
-      <Top title="하이" subTitle="바이" />
+      <Top
+        title="혜택 좋은 카드"
+        subTitle="회원님을 위해서 혜택이 좋은 카드를 모아봤습니다."
+      />
       <AddBanners />
       <CardList />
     </div>
