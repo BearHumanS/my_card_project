@@ -6,6 +6,9 @@ import usePollApplyStatus from '@/components/apply/hooks/usePollApplyStatus'
 import { updateApply } from '@/remote/apply'
 import { APPLY_STATUS } from '@/types/apply'
 import useUser from '@/hooks/auth/useUser'
+import useAppliedCard from '@/components/apply/hooks/useAppliedCard'
+import { useAlertContext } from '@/contexts/AlertContext'
+import PageLoader from '@/components/common/PageLoader'
 
 const ApplyPage = () => {
   const [readyToPoll, setReadyToPoll] = useState(false)
@@ -14,11 +17,43 @@ const ApplyPage = () => {
   const { id } = useParams() as { id: string }
   const navigate = useNavigate()
 
+  const { open } = useAlertContext()
+
+  const storageKey = `applied-${user?.uid}-${id}`
+
+  const { data } = useAppliedCard({
+    userId: user?.uid as string,
+    cardId: id,
+    options: {
+      onSuccess: (applied) => {
+        if (applied == null) {
+          return
+        }
+
+        if (applied.status === APPLY_STATUS.COMPLETE) {
+          localStorage.removeItem(storageKey)
+          open({
+            title: '이미 발급이 완료된 카드입니다.',
+            onButtonClick: () => {
+              window.history.back()
+            },
+          })
+
+          return
+        }
+
+        setReadyToPoll(true)
+      },
+      onError: () => {},
+      suspense: true,
+    },
+  })
+
   usePollApplyStatus({
     onSuccess: async () => {
       await updateApply({
         applyValues: {
-          staus: APPLY_STATUS.COMPLETE,
+          status: APPLY_STATUS.COMPLETE,
         },
         userId: user?.uid as string,
         cardId: id,
@@ -30,7 +65,7 @@ const ApplyPage = () => {
     onError: async () => {
       await updateApply({
         applyValues: {
-          staus: APPLY_STATUS.REJECT,
+          status: APPLY_STATUS.REJECT,
         },
         userId: user?.uid as string,
         cardId: id,
@@ -51,8 +86,12 @@ const ApplyPage = () => {
     },
   })
 
+  if (data != null && data.status === APPLY_STATUS.COMPLETE) {
+    return null
+  }
+
   if (readyToPoll || applying) {
-    return <div>로딩 중...</div>
+    return <PageLoader message="카드 신청 중 입니다. 잠시만 기다려주세요." />
   }
 
   return <Apply onSubmit={mutate} />

@@ -17,7 +17,8 @@ export interface ApplyValues {
   isMaster: boolean
   isTransit: boolean
   isHiPass: boolean
-  staus: keyof typeof APPLY_STATUS
+  status: keyof typeof APPLY_STATUS
+  step: number
 }
 
 export interface Option {
