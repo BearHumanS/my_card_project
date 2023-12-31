@@ -8,6 +8,7 @@ export const colorTheme = css`
     --white: #fff;
     --black: #212121;
     --grey: #eee;
+    --grey2: #a6b5c1;
   }
 `
 
@@ -18,6 +19,7 @@ export const colors = {
   white: 'var(--white)',
   black: 'var(--black)',
   grey: 'var(--grey)',
+  grey2: 'var(--grey2)',
 }
 
 export type Colors = keyof typeof colors
