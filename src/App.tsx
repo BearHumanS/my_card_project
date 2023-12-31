@@ -9,6 +9,7 @@ import SignupPage from '@pages/Signup'
 import Private from '@components/auth/Private'
 import ApplyPage from '@pages/Apply'
 import ApplyDone from './pages/ApplyDone'
+import PageLoader from './components/common/PageLoader'
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
           path="/apply/:id"
           element={
             <Private>
-              <Suspense fallback={<></>}>
+              <Suspense fallback={<PageLoader />}>
                 <ApplyPage />
               </Suspense>
             </Private>
