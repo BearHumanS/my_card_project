@@ -7,6 +7,7 @@ import SigninPage from '@pages/Signin'
 import SignupPage from '@pages/Signup'
 import Private from '@components/auth/Private'
 import ApplyPage from '@pages/Apply'
+import ApplyDone from './pages/ApplyDone'
 
 function App() {
   return (
@@ -23,6 +24,14 @@ function App() {
           element={
             <Private>
               <ApplyPage />
+            </Private>
+          }
+        />
+        <Route
+          path="/apply/done"
+          element={
+            <Private>
+              <ApplyDone />
             </Private>
           }
         />

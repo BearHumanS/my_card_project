@@ -1,32 +1,61 @@
-import BasicInfo from '@/components/apply/BasicInfo'
-import CardInfo from '@/components/apply/CardInfo'
-import Terms from '@/components/apply/Terms'
-import { ApplyValues } from '@/types/apply'
 import { useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import Apply from '@components/apply'
+import useApplyCardMutaion from '@components/apply/hooks/useApplyCardMutaion'
+import usePollApplyStatus from '@/components/apply/hooks/usePollApplyStatus'
+import { updateApply } from '@/remote/apply'
+import { APPLY_STATUS } from '@/types/apply'
+import useUser from '@/hooks/auth/useUser'
 
 const ApplyPage = () => {
-  const [step, setStep] = useState(1)
+  const [readyToPoll, setReadyToPoll] = useState(false)
 
-  const handleTermsChange = (terms: ApplyValues['terms']) => {
-    console.log(terms)
+  const user = useUser()
+  const { id } = useParams() as { id: string }
+  const navigate = useNavigate()
+
+  usePollApplyStatus({
+    onSuccess: async () => {
+      await updateApply({
+        applyValues: {
+          staus: APPLY_STATUS.COMPLETE,
+        },
+        userId: user?.uid as string,
+        cardId: id,
+      })
+      navigate('/apply/done?success=true', {
+        replace: true,
+      })
+    },
+    onError: async () => {
+      await updateApply({
+        applyValues: {
+          staus: APPLY_STATUS.REJECT,
+        },
+        userId: user?.uid as string,
+        cardId: id,
+      })
+      navigate('/apply/done?success=false', {
+        replace: true,
+      })
+    },
+    enabled: readyToPoll,
+  })
+
+  const { mutate, isLoading: applying } = useApplyCardMutaion({
+    onSuccess: () => {
+      setReadyToPoll(true)
+    },
+    onError: () => {
+      window.history.back()
+    },
+  })
+
+  if (readyToPoll || applying) {
+    return <div>로딩 중...</div>
   }
 
-  const handleBasicInfoChange = (
-    infoValues: Pick<
-      ApplyValues,
-      'annualIncome' | 'creditScore' | 'paymentDate'
-    >,
-  ) => {
-    console.log(infoValues)
-  }
-
-  return (
-    <div>
-      {step === 0 ? <Terms onNext={handleTermsChange} /> : null}
-      {step === 1 ? <BasicInfo onNext={handleBasicInfoChange} /> : null}
-      {step === 2 ? <CardInfo /> : null}
-    </div>
-  )
+  return <Apply onSubmit={mutate} />
 }
 
 export default ApplyPage
