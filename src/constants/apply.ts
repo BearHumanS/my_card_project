@@ -1,4 +1,4 @@
-import { Term } from '@/types/apply'
+import { Option, Term } from '@/types/apply'
 
 export const applyList = [
   {
@@ -11,3 +11,19 @@ export const applyList = [
     link: 'https://www.naver.com',
   },
 ] as Term[]
+
+export const annualIncomeOptions = [
+  { label: '600만원 ~ 5,000만원', value: '600만원 ~ 5,000만원' },
+  { label: '5,000만원 ~ 1억원', value: '5,000만원 ~ 1억원' },
+  { label: '1억원 초과', value: '1억원 초과' },
+] as Option[]
+
+export const creditScoreOptions = [
+  { label: '600점 이상', value: '600점 이상' },
+  { label: '600점 미만', value: '600점 미만' },
+] as Option[]
+
+export const paymentDateOptions = [
+  { label: '1일', value: '1일' },
+  { label: '25일', value: '25일' },
+] as Option[]
