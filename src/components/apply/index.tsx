@@ -14,29 +14,42 @@ const Apply = ({
   const user = useUser()
   const { id } = useParams()
 
-  const [step, setStep] = useState(0)
-  const [applyValues, setApplyValues] = useState<Partial<ApplyValues>>({
-    userId: user?.uid,
-    cardId: id,
+  const storageKey = `applied-${user?.uid}-${id}`
+
+  const [applyValues, setApplyValues] = useState<Partial<ApplyValues>>(() => {
+    const apllied = localStorage.getItem(storageKey)
+
+    if (apllied == null) {
+      return {
+        userId: user?.uid,
+        cardId: id,
+        step: 0,
+      }
+    }
+
+    return JSON.parse(apllied)
   })
 
   useEffect(() => {
-    if (step === 3) {
+    if (applyValues.step === 3) {
+      localStorage.removeItem(storageKey)
+
       onSubmit({
         ...applyValues,
         appliedAt: new Date(),
         status: APPLY_STATUS.READY,
       } as ApplyValues)
+    } else {
+      localStorage.setItem(storageKey, JSON.stringify(applyValues))
     }
-  }, [applyValues, onSubmit, step])
+  }, [applyValues, onSubmit, storageKey])
 
   const handleTermsChange = (terms: ApplyValues['terms']) => {
     setApplyValues((prev) => ({
       ...prev,
       terms,
+      step: (prev.step as number) + 1,
     }))
-
-    setStep((prev) => prev + 1)
   }
 
   const handleBasicInfoChange = (
@@ -48,9 +61,8 @@ const Apply = ({
     setApplyValues((prev) => ({
       ...prev,
       ...infoValues,
+      step: (prev.step as number) + 1,
     }))
-
-    setStep((prev) => prev + 1)
   }
 
   const handleCardInfoChange = (
@@ -59,16 +71,19 @@ const Apply = ({
     setApplyValues((prev) => ({
       ...prev,
       ...cardInfoValues,
+      step: (prev.step as number) + 1,
     }))
-
-    setStep((prev) => prev + 1)
   }
 
   return (
     <div>
-      {step === 0 ? <Terms onNext={handleTermsChange} /> : null}
-      {step === 1 ? <BasicInfo onNext={handleBasicInfoChange} /> : null}
-      {step === 2 ? <CardInfo onNext={handleCardInfoChange} /> : null}
+      {applyValues.step === 0 ? <Terms onNext={handleTermsChange} /> : null}
+      {applyValues.step === 1 ? (
+        <BasicInfo onNext={handleBasicInfoChange} />
+      ) : null}
+      {applyValues.step === 2 ? (
+        <CardInfo onNext={handleCardInfoChange} />
+      ) : null}
     </div>
   )
 }
