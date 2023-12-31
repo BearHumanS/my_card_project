@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import { Link, useLocation } from 'react-router-dom'
-import useUser from '../hooks/auth/useUser'
+import useUser from '@hooks/auth/useUser'
 import { colors } from '@/styles/color'
 import Button from './Button'
 import Flex from './Flex'
