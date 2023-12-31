@@ -37,6 +37,7 @@ const RAW_RUNTIME_STATE =
           ["@types/eslint", "npm:8.56.0"],\
           ["@types/jest", "npm:27.5.2"],\
           ["@types/node", "npm:16.18.68"],\
+          ["@types/qs", "npm:6.9.11"],\
           ["@types/react", "npm:18.2.45"],\
           ["@types/react-dom", "npm:18.2.18"],\
           ["@types/testing-library__jest-dom", "npm:6.0.0"],\
@@ -50,6 +51,7 @@ const RAW_RUNTIME_STATE =
           ["firebase", "npm:10.7.1"],\
           ["framer-motion", "virtual:9e56a5b1127e64753c278a04ff2d143adf6091b9f8e221903cd244b5b95bba1176f46a7056a74e69dc829da2805db2fd090f608125786602713642c7b6bcf314#npm:10.16.16"],\
           ["prettier", "npm:3.1.1"],\
+          ["qs", "npm:6.11.2"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:9e56a5b1127e64753c278a04ff2d143adf6091b9f8e221903cd244b5b95bba1176f46a7056a74e69dc829da2805db2fd090f608125786602713642c7b6bcf314#npm:18.2.0"],\
           ["react-query", "virtual:9e56a5b1127e64753c278a04ff2d143adf6091b9f8e221903cd244b5b95bba1176f46a7056a74e69dc829da2805db2fd090f608125786602713642c7b6bcf314#npm:3.39.3"],\
@@ -14362,6 +14364,7 @@ const RAW_RUNTIME_STATE =
           ["@types/eslint", "npm:8.56.0"],\
           ["@types/jest", "npm:27.5.2"],\
           ["@types/node", "npm:16.18.68"],\
+          ["@types/qs", "npm:6.9.11"],\
           ["@types/react", "npm:18.2.45"],\
           ["@types/react-dom", "npm:18.2.18"],\
           ["@types/testing-library__jest-dom", "npm:6.0.0"],\
@@ -14375,6 +14378,7 @@ const RAW_RUNTIME_STATE =
           ["firebase", "npm:10.7.1"],\
           ["framer-motion", "virtual:9e56a5b1127e64753c278a04ff2d143adf6091b9f8e221903cd244b5b95bba1176f46a7056a74e69dc829da2805db2fd090f608125786602713642c7b6bcf314#npm:10.16.16"],\
           ["prettier", "npm:3.1.1"],\
+          ["qs", "npm:6.11.2"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:9e56a5b1127e64753c278a04ff2d143adf6091b9f8e221903cd244b5b95bba1176f46a7056a74e69dc829da2805db2fd090f608125786602713642c7b6bcf314#npm:18.2.0"],\
           ["react-query", "virtual:9e56a5b1127e64753c278a04ff2d143adf6091b9f8e221903cd244b5b95bba1176f46a7056a74e69dc829da2805db2fd090f608125786602713642c7b6bcf314#npm:3.39.3"],\
@@ -16986,6 +16990,14 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/qs-npm-6.11.0-caf1bc9dea-10c0.zip/node_modules/qs/",\
         "packageDependencies": [\
           ["qs", "npm:6.11.0"],\
+          ["side-channel", "npm:1.0.4"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:6.11.2", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/qs-npm-6.11.2-b118bc1c6f-10c0.zip/node_modules/qs/",\
+        "packageDependencies": [\
+          ["qs", "npm:6.11.2"],\
           ["side-channel", "npm:1.0.4"]\
         ],\
         "linkType": "HARD"\
