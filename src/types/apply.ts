@@ -11,4 +11,12 @@ export interface ApplyValues {
   terms: Array<Term['id']>
   applieAt: Date
   cardId: string
+  annualIncome: string
+  creditScore: string
+  paymentDate: string
+}
+
+export interface Option {
+  label: string
+  value: string | number | undefined
 }

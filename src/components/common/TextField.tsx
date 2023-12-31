@@ -14,10 +14,7 @@ interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   helpMessage?: ReactNode
 }
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  function TextField(
-    { label, hasError, helpMessage, onFocus, onBlur, ...props },
-    ref,
-  ) {
+  ({ label, hasError, helpMessage, onFocus, onBlur, ...props }, ref) => {
     const [focused, setFocused] = useState(false)
 
     const labelColor = hasError ? 'red' : focused ? 'blue' : undefined
