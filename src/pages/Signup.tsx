@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { collection, doc, setDoc } from 'firebase/firestore'
 import { auth, db } from '@remote/firebase'
@@ -6,6 +7,8 @@ import { FormValues } from '@/types/signup'
 import { COLLECTIONS } from '@/constants'
 
 const SignupPage = () => {
+  const navigate = useNavigate()
+
   const handleSubmit = async (formValues: FormValues) => {
     const { email, password, name } = formValues
 
@@ -22,6 +25,8 @@ const SignupPage = () => {
     }
 
     await setDoc(doc(collection(db, COLLECTIONS.USER), user.uid), newUser)
+
+    navigate('/')
   }
 
   return (
