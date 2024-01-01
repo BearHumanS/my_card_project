@@ -15,7 +15,7 @@ import { Card } from '@/types/card'
 export const getCards = async (pageCursor?: QuerySnapshot<Card>) => {
   const cardQuery =
     pageCursor == null
-      ? query(collection(db, COLLECTIONS.CARD), limit(10))
+      ? query(collection(db, COLLECTIONS.CARD), limit(5))
       : query(
           collection(db, COLLECTIONS.CARD),
           startAfter(pageCursor),
