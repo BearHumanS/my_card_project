@@ -11,8 +11,10 @@ import { collection, doc, updateDoc } from 'firebase/firestore'
 import { useSetRecoilState } from 'recoil'
 import { userAtom } from '@/atoms/user'
 import useUser from '@/hooks/auth/useUser'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { COLLECTIONS, STORAGE_DOWNLOAD_URL } from '@/constants'
+import Skeleton from '../common/Skeleton'
+import { css } from '@emotion/react'
 
 const MyImage = ({
   size = 40,
@@ -23,55 +25,70 @@ const MyImage = ({
 }) => {
   const user = useUser()
   const setUser = useSetRecoilState(userAtom)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleUploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files
+    setIsLoading(true)
+    try {
+      const files = e.target.files
 
-    const currentUser = getAuth(app).currentUser
+      const currentUser = getAuth(app).currentUser
 
-    if (files == null || user == null || currentUser == null) {
-      return
+      if (files == null || user == null || currentUser == null) {
+        return
+      }
+
+      const file = files[0].name
+      const storageRef = ref(storage, `users/${user.uid}/${file}`)
+
+      if (user?.photoURL && user?.photoURL.includes(STORAGE_DOWNLOAD_URL)) {
+        const imageRef = ref(storage, user?.photoURL)
+        await deleteObject(imageRef).catch((error) => console.log(error))
+      }
+
+      const upload = await uploadBytes(storageRef, files[0])
+
+      const downloadUrl = await getDownloadURL(upload.ref)
+
+      await updateProfile(currentUser, {
+        photoURL: downloadUrl,
+      })
+
+      await updateDoc(doc(collection(db, COLLECTIONS.USER), currentUser.uid), {
+        photoURL: downloadUrl,
+      })
+
+      setUser({
+        ...user,
+        photoURL: downloadUrl,
+      })
+    } catch (e) {
+      console.log(e)
+    } finally {
+      setIsLoading(false)
     }
-
-    const file = files[0].name
-    const storageRef = ref(storage, `users/${user.uid}/${file}`)
-
-    if (user?.photoURL && user?.photoURL.includes(STORAGE_DOWNLOAD_URL)) {
-      const imageRef = ref(storage, user?.photoURL)
-      await deleteObject(imageRef).catch((error) => console.log(error))
-    }
-
-    const upload = await uploadBytes(storageRef, files[0])
-
-    const downloadUrl = await getDownloadURL(upload.ref)
-
-    await updateProfile(currentUser, {
-      photoURL: downloadUrl,
-    })
-
-    await updateDoc(doc(collection(db, COLLECTIONS.USER), currentUser.uid), {
-      photoURL: downloadUrl,
-    })
-
-    setUser({
-      ...user,
-      photoURL: downloadUrl,
-    })
   }
 
   return (
     <Container>
-      <img
-        src={
-          user?.photoURL ||
-          'https://cdn4.iconfinder.com/data/icons/glyphs/24/icons_user2-256.png'
-        }
-        alt="프로필 이미지"
-        width={size}
-      />
-      {mode === 'upload' ? (
-        <input type="file" accept="image/*" onChange={handleUploadImage} />
-      ) : null}
+      {isLoading ? (
+        <Skeleton width={size} height={size} css={skeletonStyles} />
+      ) : (
+        <>
+          <img
+            src={
+              user?.photoURL ||
+              'https://cdn4.iconfinder.com/data/icons/glyphs/24/icons_user2-256.png'
+            }
+            alt="프로필 이미지"
+            width={size}
+            height={size}
+          />
+          {mode === 'upload' ? (
+            <input type="file" accept="image/*" onChange={handleUploadImage} />
+          ) : null}
+        </>
+      )}
     </Container>
   )
 }
@@ -94,6 +111,10 @@ const Container = styled.div`
     opacity: 0;
     cursor: pointer;
   }
+`
+
+const skeletonStyles = css`
+  border-radius: 100%;
 `
 
 export default MyImage
