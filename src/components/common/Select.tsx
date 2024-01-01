@@ -18,6 +18,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       <Flex direction="column" css={containerStyles}>
         {label ? (
           <Text
+            bold
             typography="t7"
             color="black"
             display="inline-block"
