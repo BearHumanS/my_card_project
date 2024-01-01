@@ -22,6 +22,7 @@ const CardList = () => {
         return snapShot.lastVisible
       },
       refetchOnWindowFocus: false,
+      suspense: true,
     },
   )
 
@@ -31,7 +32,7 @@ const CardList = () => {
 
   const loadMore = useCallback(() => {
     if (hasNextPage === false || isFetching) {
-      return
+      return null
     }
 
     fetchNextPage()
@@ -85,7 +86,11 @@ const CardList = () => {
           )
         })}
       </ul>
-      {hasNextPage && <div ref={loader}></div>}
+      {hasNextPage && (
+        <div ref={loader}>
+          <ListRow.Skeleton />
+        </div>
+      )}
     </div>
   )
 }
