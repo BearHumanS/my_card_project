@@ -10,6 +10,7 @@ import Private from '@components/auth/Private'
 import ApplyPage from '@pages/Apply'
 import ApplyDone from './pages/ApplyDone'
 import PageLoader from './components/common/PageLoader'
+import MyPage from './pages/My'
 
 function App() {
   return (
@@ -36,6 +37,14 @@ function App() {
           element={
             <Private>
               <ApplyDone />
+            </Private>
+          }
+        />
+        <Route
+          path="/mypage"
+          element={
+            <Private>
+              <MyPage />
             </Private>
           }
         />
