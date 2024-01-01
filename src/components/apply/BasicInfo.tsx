@@ -7,6 +7,8 @@ import {
 import Select from '@common/Select'
 import { ApplyValues } from '@/types/apply'
 import FixedBottomButton from '../common/FixedBottomButton'
+import styled from '@emotion/styled'
+import Space from '../common/Space'
 
 type InfoValues = Pick<
   ApplyValues,
@@ -37,7 +39,8 @@ const BasicInfo = ({
   const allChecked = Object.values(infoValues).every((value) => value)
 
   return (
-    <div>
+    <Container>
+      <Space size={40} />
       <Select
         label="연소득"
         name="annualIncome"
@@ -46,6 +49,7 @@ const BasicInfo = ({
         value={infoValues.annualIncome}
         onChange={handleSelectChange}
       />
+      <Space size={16} />
       <Select
         label="신용점수"
         name="creditScore"
@@ -54,6 +58,7 @@ const BasicInfo = ({
         value={infoValues.creditScore}
         onChange={handleSelectChange}
       />
+      <Space size={16} />
       <Select
         label="결제일"
         name="paymentDate"
@@ -70,8 +75,12 @@ const BasicInfo = ({
         }}
         disabled={allChecked === false}
       />
-    </div>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  padding: 20px;
+`
 
 export default BasicInfo
