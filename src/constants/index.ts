@@ -4,3 +4,5 @@ export const COLLECTIONS = {
   USER: 'USER',
   CARD_APPLY: 'CARD_APPLY',
 } as const
+
+export const STORAGE_DOWNLOAD_URL = 'https://firebasestorage.googleapis.com'
