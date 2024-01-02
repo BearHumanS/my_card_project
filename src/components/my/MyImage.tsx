@@ -15,6 +15,8 @@ import { ChangeEvent, useState } from 'react'
 import { COLLECTIONS, STORAGE_DOWNLOAD_URL } from '@/constants'
 import Skeleton from '../common/Skeleton'
 import { css } from '@emotion/react'
+import { useAlertContext } from '@/contexts/AlertContext'
+import { FirebaseError } from 'firebase/app'
 
 const MyImage = ({
   size = 40,
@@ -26,6 +28,7 @@ const MyImage = ({
   const user = useUser()
   const setUser = useSetRecoilState(userAtom)
   const [isLoading, setIsLoading] = useState(false)
+  const { open } = useAlertContext()
 
   const handleUploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
     setIsLoading(true)
@@ -64,6 +67,16 @@ const MyImage = ({
       })
     } catch (e) {
       console.log(e)
+      if (e instanceof FirebaseError) {
+        if (e.code) {
+          open({
+            title: '나중에 다시 시도해주세요.',
+            onButtonClick: () => {},
+          })
+
+          return
+        }
+      }
     } finally {
       setIsLoading(false)
     }
