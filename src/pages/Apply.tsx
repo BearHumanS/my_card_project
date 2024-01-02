@@ -9,6 +9,7 @@ import useUser from '@/hooks/auth/useUser'
 import useAppliedCard from '@/components/apply/hooks/useAppliedCard'
 import { useAlertContext } from '@/contexts/AlertContext'
 import PageLoader from '@/components/common/PageLoader'
+import { STATUS_MESSAGE } from '@/constants/apply'
 
 const ApplyPage = () => {
   const [readyToPoll, setReadyToPoll] = useState(false)
@@ -49,7 +50,7 @@ const ApplyPage = () => {
     },
   })
 
-  usePollApplyStatus({
+  const { data: status } = usePollApplyStatus({
     onSuccess: async () => {
       await updateApply({
         applyValues: {
@@ -91,7 +92,7 @@ const ApplyPage = () => {
   }
 
   if (readyToPoll || applying) {
-    return <PageLoader message="카드 신청 중 입니다. 잠시만 기다려주세요." />
+    return <PageLoader message={STATUS_MESSAGE[status ?? 'READY']} />
   }
 
   return <Apply onSubmit={mutate} />
