@@ -9,8 +9,13 @@ import FixedBottomButton from '@/components/common/FixedBottomButton'
 import Flex from '@common/Flex'
 import Text from '@common/Text'
 import useUser from '@/hooks/auth/useUser'
-import { useCallback } from 'react'
+import { useCallback, MouseEvent } from 'react'
 import { useAlertContext } from '@/contexts/AlertContext'
+import Comment from '@/components/card/Comment'
+import Space from '@/components/common/Space'
+import ScrollIndicator from '@/components/common/ScrollIndicator '
+import Button from '@/components/common/Button'
+import styled from '@emotion/styled'
 
 const CardPage = () => {
   const { id = '' } = useParams()
@@ -44,10 +49,18 @@ const CardPage = () => {
 
   const { name, corpName, promotion, tags, benefit } = data
 
-  const subTitle = promotion ? removeTags(promotion.title) : tags.join(', ')
+  const subTitle = promotion ? promotion.title : tags.join(', ')
+
+  const handleUpButton = (e: MouseEvent<HTMLButtonElement>) => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    })
+  }
 
   return (
-    <div>
+    <Container>
       <Top title={`${corpName} ${name}`} subTitle={subTitle} />
 
       <ul>
@@ -80,16 +93,35 @@ const CardPage = () => {
           )
         })}
       </ul>
-
+      <Space size={20} />
+      <ScrollIndicator targetId="comments-section">리뷰 보기</ScrollIndicator>
       {promotion ? (
         <Flex direction="column" css={termsContainerStyles}>
           <Text bold>유의사항</Text>
-          <Text typography="t7">{removeTags(promotion.terms)}</Text>
+          <Text typography="t7">{promotion.terms}</Text>
         </Flex>
       ) : null}
 
-      <FixedBottomButton label="신청하기" onClick={moveTo} />
-    </div>
+      <Space size={500} />
+
+      <div id="comments-section">
+        <Comment />
+        <Flex justify="flex-end" css={upButtonStyles}>
+          <Button weak onClick={handleUpButton}>
+            <img
+              width={20}
+              height={20}
+              src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-up-a-256.png"
+              alt="상단으로"
+            />
+          </Button>
+        </Flex>
+      </div>
+
+      <Space size={100} />
+
+      <FixedBottomButton label="1분만에 신청하기" onClick={moveTo} />
+    </Container>
   )
 }
 
@@ -98,23 +130,13 @@ const termsContainerStyles = css`
   padding: 0 24px 80px 24px;
 `
 
-const removeTags = (text: string) => {
-  let output = ''
+const upButtonStyles = css`
+  padding: 24px 24px 0 24px;
+`
 
-  for (let i = 0; i < text.length; i += 1) {
-    if (text[i] === '<') {
-      for (let j = i + 1; j < text.length; j += 1) {
-        if (text[j] === '>') {
-          i = j
-          break
-        }
-      }
-    } else {
-      output += text[i]
-    }
-  }
-  return output
-}
+const Container = styled.div({
+  transition: 'transform 0.3s',
+})
 
 const IconCheck = () => {
   return (
