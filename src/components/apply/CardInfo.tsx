@@ -21,14 +21,13 @@ const CardInfo = ({
 
   const handleButtonClick = useCallback((e: MouseEvent<HTMLButtonElement>) => {
     const $button = e.target as HTMLButtonElement
+    const value = $button.dataset.value === 'true'
 
     setCardInfoValues((prev) => ({
       ...prev,
-      [$button.name]: Boolean($button.dataset.value),
+      [$button.name]: value,
     }))
   }, [])
-
-  console.log(cardInfoValues)
 
   return (
     <div>
