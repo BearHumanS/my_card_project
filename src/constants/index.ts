@@ -6,3 +6,5 @@ export const COLLECTIONS = {
 } as const
 
 export const STORAGE_DOWNLOAD_URL = 'https://firebasestorage.googleapis.com'
+
+export const LAST_STEP = 3
