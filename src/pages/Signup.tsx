@@ -12,21 +12,25 @@ const SignupPage = () => {
   const handleSubmit = async (formValues: FormValues) => {
     const { email, password, name } = formValues
 
-    const { user } = await createUserWithEmailAndPassword(auth, email, password)
+    try {
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      )
+      const profileUpdate = updateProfile(user, { displayName: name })
+      const docSet = setDoc(doc(collection(db, COLLECTIONS.USER), user.uid), {
+        uid: user.uid,
+        email: user.email,
+        displayName: name,
+      })
 
-    await updateProfile(user, {
-      displayName: name,
-    })
+      await Promise.all([profileUpdate, docSet])
 
-    const newUser = {
-      uid: user.uid,
-      email: user.email,
-      displayName: name,
+      navigate('/')
+    } catch (e) {
+      console.error(e)
     }
-
-    await setDoc(doc(collection(db, COLLECTIONS.USER), user.uid), newUser)
-
-    navigate('/')
   }
 
   return (

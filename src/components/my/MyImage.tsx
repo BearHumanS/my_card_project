@@ -68,14 +68,13 @@ const MyImage = ({
     } catch (e) {
       console.log(e)
       if (e instanceof FirebaseError) {
-        if (e.code) {
-          open({
-            title: '나중에 다시 시도해주세요.',
-            onButtonClick: () => {},
-          })
+        console.error('Firebase 오류 코드:', e.code)
+        open({
+          title: '나중에 다시 시도해주세요.',
+          onButtonClick: () => {},
+        })
 
-          return
-        }
+        return
       }
     } finally {
       setIsLoading(false)
