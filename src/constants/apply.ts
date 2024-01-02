@@ -1,4 +1,4 @@
-import { Option, Term } from '@/types/apply'
+import { APPLY_STATUS, Option, Term } from '@/types/apply'
 
 export const applyList = [
   {
@@ -27,3 +27,9 @@ export const paymentDateOptions = [
   { label: '1일', value: '1일' },
   { label: '25일', value: '25일' },
 ] as Option[]
+
+export const STATUS_MESSAGE = {
+  [APPLY_STATUS.READY]: '카드 심사를 기다리고 있어요.',
+  [APPLY_STATUS.PROGRESS]: '카드 심사 진행 중에 있어요. 잠시만 기다려주세요.',
+  [APPLY_STATUS.COMPLETE]: '카드 신청이 완료되었어요.',
+}
