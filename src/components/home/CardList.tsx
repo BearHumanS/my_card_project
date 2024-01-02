@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import ListRow from '@common/ListRow'
 import Badge from '../common/Badge'
 import { css } from '@emotion/react'
+import { colors } from '@/styles/color'
 
 const CardList = () => {
   const {
@@ -97,6 +98,12 @@ const CardList = () => {
 
 const cardStyles = css`
   cursor: pointer;
+
+  & li:hover {
+    border: 1px solid ${colors.blue};
+    border-radius: 5px;
+    transition: border 0.3s ease-in-out;
+  }
 `
 
 export default CardList
