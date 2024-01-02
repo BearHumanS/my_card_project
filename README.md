@@ -1,46 +1,90 @@
-# Getting Started with Create React App
+# 마이카드
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 배포사이트
 
-## Available Scripts
+[마이카드]('https://my-card-sable.vercel.app/')
 
-In the project directory, you can run:
+<br />
 
-### `yarn start`
+## 기술 스택
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Development
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<p>
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white" />
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white" />
+<img src="https://img.shields.io/badge/emotion-DB7093?=flat&logo=emotion&logoColor=white" />
+<img src="https://img.shields.io/badge/firebase-FFCA28?style=flat&logo=firebase&logoColor=white" />
+<br />
+<img src="https://img.shields.io/badge/React Router-CA4245?style=flat&logo=React Router&logoColor=white" />
+<img src="https://img.shields.io/badge/React Query-3578E5?style=flat&logo=React Query&logoColor=white" />
+<img src="https://img.shields.io/badge/recoil-FF4154?style=flat&logo=recoil&logoColor=white" />
+<img src="https://img.shields.io/badge/Swiper_Js-6332F6?style=flat&logo=swiper&logoColor=white" />
+<img src="https://img.shields.io/badge/validator-0170FE?style?=flat&logo=validator&logoColor=white" />
+<img src="https://img.shields.io/badge/.ENV-ECD53F?style=flat&logo=dotenv&logoColor=white" />
+</p>
 
-### `yarn test`
+## Config
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<p>
+<img src="https://img.shields.io/badge/yarn-2C8EBB?style=flat&logo=yarn&logoColor=white"/></a>
+</p>
 
-### `yarn build`
+### Deployment
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img src="https://img.shields.io/badge/vercel-000000?style=flat&logo=vercel&logoColor=white"/></a>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Environment
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<p>
+<img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat&logo=Visual Studio Code&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/Git-F05032?style=flat&logo=Git&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/Github_Actions-2088FF?style=flat&logo=githubactions&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white"/></a>
+</p>
 
-### `yarn eject`
+<br />
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Commit Convention
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `feat` : 새로운 기능 추가
+- `fix` : 버그 수정
+- `docs` : 문서 수정
+- `style` : 코드 포맷팅, 세미콜론 누락, 코드 변경이 없는 경우
+- `refactor` : 코드 리펙토링
+- `test` : 테스트 코드, 리펙토링 테스트 코드 추가
+- `chore` : 빌드 업무 수정, 패키지 매니저 수정
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+예시] Chore: react-query 설치
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<br />
+<br />
 
-## Learn More
+## Pull Request Convention
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- 작업단위 별 브랜치 생성 후 작업
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br />
+<br />
+<br />
+
+## 프로젝트 구성
+
+|                                                        **메인 화면(로그인 전)**                                                         |                                                              **회원가입**                                                               |
+| :-------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------: |
+| <img width="422" alt="image" src="https://github.com/BearHumanS/my_card_project/assets/115094069/80ff5c9d-4062-45c3-bf37-307076dc24e8"> | <img width="422" alt="image" src="https://github.com/BearHumanS/my_card_project/assets/115094069/426d459c-8926-4f05-9ee8-2a04448ad2cc"> |
+|                                                                                                                                         |
+
+|                                                    **로그아웃*로그인*프로필 변경 I**                                                    |                                                          **카드 상세 페이지**                                                           |
+| :-------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------: |
+| <img width="433" alt="image" src="https://github.com/BearHumanS/my_card_project/assets/115094069/256882ac-5066-4c99-9590-ee52a04b7af2"> | <img width="433" alt="image" src="https://github.com/BearHumanS/my_card_project/assets/115094069/ff892f25-7d6f-457f-a0ef-5f7ce9d9d36a"> |
+
+|                                                       **카드 신청 및 신청 완료**                                                        |                                                       **카드 신청 및 신청 실패**                                                        |
+| :-------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------: |
+| <img width="433" alt="image" src="https://github.com/BearHumanS/my_card_project/assets/115094069/15238b8b-b208-4990-846d-c4759491deef"> | <img width="433" alt="image" src="https://github.com/BearHumanS/my_card_project/assets/115094069/ca267b64-0f24-44a5-9da3-0f5671402d88"> |
+
+|                                                         **카드 중복 신청 방지**                                                         |                                                   **카드 신청 도중 이탈 이후 재신청**                                                   |
+| :-------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------: |
+| <img width="433" alt="image" src="https://github.com/BearHumanS/my_card_project/assets/115094069/43f12e38-2db6-4902-a9df-066c1eebd415"> | <img width="433" alt="image" src="https://github.com/BearHumanS/my_card_project/assets/115094069/f392ddc6-f7d5-4558-af8d-427af61bd642"> |
