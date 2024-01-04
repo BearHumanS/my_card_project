@@ -8,7 +8,7 @@ export const applyList = [
   {
     id: '02',
     title: '(필수) 개인정보 요약동의서',
-    link: 'https://www.naver.com',
+    link: '#',
   },
 ] as Term[]
 

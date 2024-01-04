@@ -4,6 +4,9 @@ import { getCards } from '@remote/card'
 import { useNavigate } from 'react-router-dom'
 import ListRow from '@common/ListRow'
 import Badge from '../common/Badge'
+/* import { css } from '@emotion/react'
+import { colors } from '@/styles/color' */
+import { motion } from 'framer-motion'
 import { css } from '@emotion/react'
 import { colors } from '@/styles/color'
 
@@ -70,23 +73,31 @@ const CardList = () => {
 
   return (
     <div>
-      <ul css={cardStyles}>
+      <motion.ul>
         {cards.map((card, index) => {
           return (
-            <ListRow
+            <motion.li
               key={card.id}
-              contents={
-                <ListRow.Texts title={`${index + 1}위`} subTitle={card.name} />
-              }
-              right={card.payback ? <Badge label={card.payback} /> : null}
-              arrow
-              onClick={() => {
-                navigate(`/card/${card.id}`)
-              }}
-            />
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+              css={cardListStyles}
+              onClick={() => navigate(`/card/${card.id}`)}
+            >
+              <ListRow
+                contents={
+                  <ListRow.Texts
+                    title={`${index + 1}위`}
+                    subTitle={card.name}
+                  />
+                }
+                right={card.payback ? <Badge label={card.payback} /> : null}
+                arrow
+              />
+            </motion.li>
           )
         })}
-      </ul>
+      </motion.ul>
       {hasNextPage && (
         <div ref={loader}>
           <ListRow.Skeleton />
@@ -96,13 +107,11 @@ const CardList = () => {
   )
 }
 
-const cardStyles = css`
-  cursor: pointer;
-
-  & li:hover {
+const cardListStyles = css`
+  &:hover {
     border: 1px solid ${colors.blue};
-    border-radius: 5px;
-    transition: border 0.3s ease-in-out;
+    border-radius: 8px;
+    margin: 0 24px;
   }
 `
 

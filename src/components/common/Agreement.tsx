@@ -47,7 +47,7 @@ const AgreementDescription = ({
         <Text typography="t6">{children}</Text>
       </Flex>
       {link != null ? (
-        <a href={link} target="_blank" rel="noreferrer">
+        <a href={link} rel="noreferrer">
           <Text typography="t6">링크</Text>
         </a>
       ) : null}
