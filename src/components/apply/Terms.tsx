@@ -3,6 +3,7 @@ import Agreement from '@common/Agreement'
 import { applyList } from '@constants/apply'
 import FixedBottomButton from '../common/FixedBottomButton'
 import { ApplyValues } from '@/types/apply'
+import Space from '../common/Space'
 
 const Terms = ({
   onNext,
@@ -44,6 +45,7 @@ const Terms = ({
         <Agreement.Title checked={allApplyChecked} onChange={handleAllChecked}>
           약관에 모두 동의
         </Agreement.Title>
+        <Space size={10} />
         {applyList.map(({ id, title, link }) => (
           <Agreement.Description
             key={id}

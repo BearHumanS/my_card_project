@@ -10,6 +10,7 @@ import Text from '@common/Text'
 import { colors } from '@/styles/color'
 import 'swiper/css'
 import 'swiper/css/autoplay'
+import { motion } from 'framer-motion'
 
 const AddBanners = () => {
   const { data, isLoading } = useQuery(['adBanners'], () => getAdBanner())
@@ -25,27 +26,29 @@ const AddBanners = () => {
     )
   }
   return (
-    <Container>
-      <Swiper
-        spaceBetween={8}
-        modules={[Autoplay]}
-        autoplay={{ delay: 2500 }}
-        loop={true}
-      >
-        {data.map((banner) => {
-          return (
-            <SwiperSlide key={banner.id}>
-              <Link to={banner.link}>
-                <Flex direction="column" css={bannerContainerStyles}>
-                  <Text bold>{banner.title}</Text>
-                  <Text typography="t7">{banner.description}</Text>
-                </Flex>
-              </Link>
-            </SwiperSlide>
-          )
-        })}
-      </Swiper>
-    </Container>
+    <motion.div whileHover={{ scale: 1.15 }}>
+      <Container>
+        <Swiper
+          spaceBetween={8}
+          modules={[Autoplay]}
+          autoplay={{ delay: 2500 }}
+          loop={true}
+        >
+          {data.map((banner) => {
+            return (
+              <SwiperSlide key={banner.id}>
+                <Link to={banner.link}>
+                  <Flex direction="column" css={bannerContainerStyles}>
+                    <Text bold>{banner.title}</Text>
+                    <Text typography="t7">{banner.description}</Text>
+                  </Flex>
+                </Link>
+              </SwiperSlide>
+            )
+          })}
+        </Swiper>
+      </Container>
+    </motion.div>
   )
 }
 

@@ -1,6 +1,7 @@
 import { colors } from '@/styles/color'
 import { css } from '@emotion/react'
 import { ReactNode, MouseEvent } from 'react'
+import Button from './Button'
 import Flex from './Flex'
 import Text from './Text'
 
@@ -41,14 +42,16 @@ const AgreementDescription = ({
   link?: string
 }) => {
   return (
-    <Flex justify="space-between">
-      <Flex as="li" onClick={(e) => onChange(e, !checked)}>
+    <Flex justify="space-between" align="center">
+      <Flex as="li" onClick={(e) => onChange(e, !checked)} align="center">
         <IconCheck checked={checked} />
         <Text typography="t6">{children}</Text>
       </Flex>
       {link != null ? (
-        <a href={link} target="_blank" rel="noreferrer">
-          <Text typography="t6">링크</Text>
+        <a href={link} rel="noreferrer">
+          <Button weak size="small">
+            링크
+          </Button>
         </a>
       ) : null}
     </Flex>
