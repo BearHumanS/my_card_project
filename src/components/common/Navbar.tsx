@@ -36,7 +36,7 @@ const Navbar = () => {
   return (
     <Flex justify="space-between" align="center" css={navbarContainerStyles}>
       <Link to="/">
-        <img src="/Icon.webp" alt="홈" width={40} height={40} />
+        <img src="/cardimage.png" alt="홈" width={40} height={40} />
       </Link>
       {renderButton()}
     </Flex>
